@@ -23,6 +23,9 @@ defmodule BudgetTracker.Expenses.Expense do
     expense
     |> cast(attrs, [:name, :description, :date, :amount])
     |> validate_required([:name, :description, :date, :amount])
+    |> validate_number(:amount, greater_than: 0)
+    |> validate_length(:name, max: 100)
+    |> validate_length(:description, max: 200)
   end
 
   def put_creator_id(expense, creator_id) do
